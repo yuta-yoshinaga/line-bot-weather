@@ -1,6 +1,13 @@
 {
 	"comment": "",
 	"ignore": "test",
-	"package": [],
+	"package": [
+		{
+			"checksumSHA1": "WzGyDb3rmHjIzZsWLXLJk7hkNdQ=",
+			"path": "github.com/line/line-bot-sdk-go/linebot",
+			"revision": "cc49de5d67783d7fd9858d51435bd1c1919db4b5",
+			"revisionTime": "2020-07-29T07:43:37Z"
+		}
+	],
 	"rootPath": "line-bot-weather"
 }
