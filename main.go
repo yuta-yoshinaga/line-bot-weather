@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -48,6 +49,21 @@ func getWeatherLine(w http.ResponseWriter, r *http.Request) {
 				}
 				appid := os.Getenv("APPID")
 				query := "q=Tokyo,jp"
+				query += "&appid=" + appid
+				query += "&lang=ja"
+				query += "&units=metric"
+				data := weather.NewCurrentWeather(query)
+				fmt.Println(message)
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(data.GetWeatherText())).Do(); err != nil {
+					log.Print(err)
+				}
+			case *linebot.LocationMessage:
+				if event.ReplyToken == "00000000000000000000000000000000" {
+					return
+				}
+				appid := os.Getenv("APPID")
+				query := "lat=" + strconv.FormatFloat(message.Latitude, 'f', -1, 64)
+				query += "&lon=" + strconv.FormatFloat(message.Longitude, 'f', -1, 64)
 				query += "&appid=" + appid
 				query += "&lang=ja"
 				query += "&units=metric"
