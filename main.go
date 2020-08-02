@@ -50,7 +50,7 @@ func getWeatherLine(w http.ResponseWriter, r *http.Request) {
 				if event.ReplyToken == "00000000000000000000000000000000" {
 					return
 				}
-				query := "q=" + getCityNameAscii(message.Text)
+				query := "q=" + getCityNameASCII(message.Text)
 				query += "&appid=" + appid
 				query += "&lang=ja"
 				query += "&units=metric"
@@ -77,7 +77,7 @@ func getWeatherLine(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func getCityNameAscii(text string) string {
+func getCityNameASCII(text string) string {
 	res := text
 	if strings.HasPrefix(text, "北海道") {
 		res = "hokkaido,JP"
