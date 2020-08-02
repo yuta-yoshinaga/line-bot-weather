@@ -173,6 +173,8 @@ func getCityNameAscii(text string) string {
 		res = "kagoshima,JP"
 	} else if strings.HasPrefix(text, "沖縄") {
 		res = "okinawa,JP"
+	} else {
+		res = "tokyo,JP"
 	}
 	return res
 }
