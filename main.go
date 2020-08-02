@@ -39,6 +39,7 @@ func getWeatherLine(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	for _, event := range events {
+		fmt.Println(event)
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
