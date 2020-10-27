@@ -2,6 +2,10 @@ package main
 
 import (
 	"fmt"
+	"line-bot-weather/frameworksanddrivers"
+	"line-bot-weather/interfaceadapters/controllers"
+	"line-bot-weather/interfaceadapters/presenters"
+	"line-bot-weather/usecases"
 	"line-bot-weather/weather"
 	"log"
 	"net/http"
@@ -11,17 +15,6 @@ import (
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
-
-func getWeather(w http.ResponseWriter, r *http.Request) {
-	appid := os.Getenv("APPID")
-	query := "q=Tokyo,jp"
-	query += "&appid=" + appid
-	query += "&lang=ja"
-	query += "&units=metric"
-	data := weather.NewCurrentWeather(query)
-	fmt.Println(data)
-	fmt.Fprintf(w, data.GetWeatherText())
-}
 
 func getWeatherLine(w http.ResponseWriter, r *http.Request) {
 	bot, err := linebot.New(
@@ -180,7 +173,12 @@ func getCityNameASCII(text string) string {
 }
 
 func main() {
-	http.HandleFunc("/", getWeather)
+	weatherRepository := frameworksanddrivers.NewOpenWeatherMapRepository()
+	weatherPresenter := presenters.NewWeatherPresenter()
+	weatherInteractor := usecases.NewWeatherInteractor(weatherRepository, weatherPresenter)
+	weatherContller := controllers.NewWeatherContller(weatherInteractor)
+	http.HandleFunc("/", weatherContller.GetWeather)
+
 	http.HandleFunc("/callback", getWeatherLine)
 	port := os.Getenv("PORT")
 	err := http.ListenAndServe(":"+port, nil)
