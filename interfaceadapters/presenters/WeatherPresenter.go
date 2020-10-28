@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-// WeatherPresenter
+// WeatherPresenter 天気情報取得プレゼンター
 type WeatherPresenter struct {
 }
 

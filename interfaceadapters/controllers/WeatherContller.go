@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-// WeatherContller
+// WeatherContller 天気情報取得コントローラ
 type WeatherContller struct {
 	usecase usecases.WeatherInputIF
 }

@@ -1,6 +1,6 @@
 package usecases
 
-// WeatherInteractor
+// WeatherInteractor 天気情報取得ユースケースインタラクター
 type WeatherInteractor struct {
 	repository OpenWeatherMapRepositoryIF
 	presenter  WeatherOutputIF
