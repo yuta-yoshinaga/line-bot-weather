@@ -3,9 +3,6 @@ package main
 import (
 	"fmt"
 	"line-bot-weather/frameworksanddrivers"
-	"line-bot-weather/interfaceadapters/controllers"
-	"line-bot-weather/interfaceadapters/presenters"
-	"line-bot-weather/usecases"
 	"line-bot-weather/weather"
 	"log"
 	"net/http"
@@ -173,12 +170,8 @@ func getCityNameASCII(text string) string {
 }
 
 func main() {
-	weatherRepository := frameworksanddrivers.NewOpenWeatherMapRepository()
-	weatherPresenter := presenters.NewWeatherPresenter()
-	weatherInteractor := usecases.NewWeatherInteractor(weatherRepository, weatherPresenter)
-	weatherContller := controllers.NewWeatherContller(weatherInteractor)
-	http.HandleFunc("/", weatherContller.GetWeather)
-
+	factoryMethod := frameworksanddrivers.NewFactoryMethod()
+	http.HandleFunc("/", factoryMethod.GetWeatherContller(os.Getenv("APPID")).GetWeather)
 	http.HandleFunc("/callback", getWeatherLine)
 	port := os.Getenv("PORT")
 	err := http.ListenAndServe(":"+port, nil)
