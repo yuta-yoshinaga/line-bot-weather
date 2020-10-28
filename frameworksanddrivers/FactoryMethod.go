@@ -22,6 +22,6 @@ func (factoryMethod FactoryMethod) GetWeatherContller(appid string) controllers.
 }
 
 // GetWeatherLineContller 天気情報取得メソッド
-func (factoryMethod FactoryMethod) GetWeatherLineContller(appid string, channelSecret string, channelToken string) controllers.WeatherContllerIF {
+func (factoryMethod FactoryMethod) GetWeatherLineContller(appid string, channelSecret string, channelToken string) controllers.WeatherLineContllerIF {
 	return controllers.NewWeatherLineContller(usecases.NewWeatherInteractor(NewOpenWeatherMapRepository(), presenters.NewWeatherPresenter()), appid, channelSecret, channelToken)
 }
