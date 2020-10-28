@@ -20,3 +20,8 @@ func NewFactoryMethod() *FactoryMethod {
 func (factoryMethod FactoryMethod) GetWeatherContller(appid string) controllers.WeatherContllerIF {
 	return controllers.NewWeatherContller(usecases.NewWeatherInteractor(NewOpenWeatherMapRepository(), presenters.NewWeatherPresenter()), appid)
 }
+
+// GetWeatherLineContller 天気情報取得メソッド
+func (factoryMethod FactoryMethod) GetWeatherLineContller(appid string, channelSecret string, channelToken string) controllers.WeatherContllerIF {
+	return controllers.NewWeatherLineContller(usecases.NewWeatherInteractor(NewOpenWeatherMapRepository(), presenters.NewWeatherPresenter()), appid, channelSecret, channelToken)
+}

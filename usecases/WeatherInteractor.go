@@ -17,7 +17,16 @@ func NewWeatherInteractor(repository OpenWeatherMapRepositoryIF, presenter Weath
 // GetCurrentWeather 天気情報取得メソッド
 func (weatherInteractor WeatherInteractor) GetCurrentWeather(input *WeatherInput) string {
 	weatherOutput := new(WeatherOutput)
-	query := "q=Tokyo,jp"
+	query := ""
+	if input.City != "" {
+		query += "q=" + input.City
+	}
+	if input.Lat != "" {
+		query += "&lat=" + input.Lat
+	}
+	if input.Lon != "" {
+		query += "&lon=" + input.Lon
+	}
 	query += "&appid=" + input.Appid
 	query += "&lang=ja"
 	query += "&units=metric"
