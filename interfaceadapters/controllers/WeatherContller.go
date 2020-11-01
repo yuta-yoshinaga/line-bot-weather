@@ -25,5 +25,5 @@ func (weatherContller WeatherContller) GetWeather(w http.ResponseWriter, r *http
 	input := new(usecases.WeatherInput)
 	input.Appid = weatherContller.Appid
 	input.City = "tokyo,JP"
-	fmt.Fprintf(w, weatherContller.usecase.GetCurrentWeather(input))
+	fmt.Fprintf(w, "%s", weatherContller.usecase.GetCurrentWeather(input))
 }

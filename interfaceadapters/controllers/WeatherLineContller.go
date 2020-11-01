@@ -77,7 +77,7 @@ func (weatherContller WeatherLineContller) GetWeatherLine(w http.ResponseWriter,
 }
 
 func getCityNameASCII(text string) string {
-	res := text
+	res := ""
 	if strings.HasPrefix(text, "北海道") {
 		res = "hokkaido,JP"
 	} else if strings.HasPrefix(text, "青森") {

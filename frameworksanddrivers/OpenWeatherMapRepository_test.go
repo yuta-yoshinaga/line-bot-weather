@@ -26,6 +26,7 @@ func TestGetCurrentWeather(t *testing.T) {
 		currentWeather := openWeatherMapRepository.GetCurrentWeather(query)
 		if currentWeather == nil {
 			t.Errorf("NG")
+			return
 		}
 		assert.Equal(t, 401, currentWeather.Cod)
 	})
@@ -38,6 +39,7 @@ func TestGetCurrentWeather(t *testing.T) {
 		currentWeather := openWeatherMapRepository.GetCurrentWeather(query)
 		if currentWeather == nil {
 			t.Errorf("NG")
+			return
 		}
 		assert.Equal(t, 200, currentWeather.Cod)
 	})
