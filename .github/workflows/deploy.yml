@@ -12,12 +12,15 @@ jobs:
     if: github.ref == 'master' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      # repositoryの中身にアクセスするためのチェックアウト
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: ${{github.ref}}
+      # tag情報取得
       - name: Unshallow
         run: git fetch --prune --unshallow --tags
+      # Heroku prod環境へデプロイ
       - name: Heroku Deploy
         uses: akhileshns/heroku-deploy@v3.4.6
         with:
@@ -41,12 +44,36 @@ jobs:
     if: github.ref == 'stage' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      # GOPATHなどのセットアップ
+      - name: set up
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.14
+        id: go
+      # repositoryの中身にアクセスするためのチェックアウト
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: ${{github.ref}}
+      # tag情報取得
       - name: Unshallow
         run: git fetch --prune --unshallow --tags
+      # cache store
+      - name: cache
+        uses: actions/cache@v1
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+      # golang-ci
+      - name: install lint
+        run: curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.18.0
+      - name: lint
+        run: golangci-lint run
+      - name: test
+        run: go test ./... -v
+      # Heroku dev環境へデプロイ
       - name: Heroku Deploy
         uses: akhileshns/heroku-deploy@v3.4.6
         with:
