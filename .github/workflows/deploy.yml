@@ -110,10 +110,7 @@ jobs:
           working-directory: ${{env.GOPATH}}/src/line-bot-weather/
       # test
       - name: test
-        run: go test ./... -v
-      # GOPATHから削除
-      - name: gopath delete
-        run: rm -rf ${{ github.workspace }}/src
+        run: cd $GOPATH/src/line-bot-weather && go test ./... -v
       # Heroku dev環境へデプロイ
       - name: Heroku Deploy
         uses: akhileshns/heroku-deploy@v3.4.6
