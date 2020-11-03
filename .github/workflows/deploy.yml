@@ -91,6 +91,9 @@ jobs:
       - name: Unshallow
         # run: cd ./src/line-bot-weather && git fetch --prune --unshallow --tags
         run: git fetch --prune --unshallow --tags
+      # GOPATHにコピー
+      - name: gopath copy
+        run: pwd && ls -al && cd .. && mkdir src && cp -r ./line-bot-weather ./src/line-bot-weather && mv ./src ./line-bot-weather/ && cd ./line-bot-weather && ls -al ./src
       # cache store
       - name: cache
         uses: actions/cache@v1
@@ -99,9 +102,6 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-      # GOPATHにコピー
-      - name: gopath copy
-        run: pwd && ls -al && cd .. && mkdir src && cp -r ./line-bot-weather ./src/line-bot-weather && mv ./src ./line-bot-weather/ && cd ./line-bot-weather && ls -al ./src
       # lint
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
