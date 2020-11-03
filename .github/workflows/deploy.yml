@@ -89,7 +89,7 @@ jobs:
           # path: ./src/line-bot-weather
       # GOPATHにコピー
       - name: gopath copy
-        run: pwd && ls -al && mkdir src && cd .. && cp -r ./line-bot-weather ./src/ && mv ./src ./line-bot-weather/ && ./cd line-bot-weather && ls -al ./line-bot-weather/src/
+        run: pwd && ls -al && mkdir src && cd .. && cp -r ./line-bot-weather ./src/ && mv ./src ./line-bot-weather/ && cd ./line-bot-weather && ls -al ./src
       # tag情報取得
       - name: Unshallow
         # run: cd ./src/line-bot-weather && git fetch --prune --unshallow --tags
