@@ -43,6 +43,9 @@ jobs:
   develop:
     if: github.ref == 'stage' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      GOPATH: ${{ github.workspace }}
+      GO111MODULE: off
     steps:
       # GOPATHなどのセットアップ
       - name: set up
@@ -51,9 +54,6 @@ jobs:
           go-version: 1.14
         id: go
       # repositoryの中身にアクセスするためのチェックアウト
-      env:
-        GOPATH: ${{ github.workspace }}
-        GO111MODULE: off
       - name: Checkout
         uses: actions/checkout@v2
         with:
