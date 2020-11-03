@@ -62,8 +62,7 @@ jobs:
       # tag情報取得
       - name: Unshallow
         run: ｜
-          cd ./src/github.com/${{ github.repository }}
-          git fetch --prune --unshallow --tags
+          cd ./src/github.com/${{ github.repository }} && git fetch --prune --unshallow --tags
       # cache store
       - name: cache
         uses: actions/cache@v1
