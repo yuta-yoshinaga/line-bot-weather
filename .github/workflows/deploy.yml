@@ -93,7 +93,7 @@ jobs:
         run: git fetch --prune --unshallow --tags
       # GOPATHにコピー
       - name: gopath copy
-        run: pwd && ls -al && cd .. && mkdir $GOPATH/src && cp -r ./line-bot-weather $GOPATH/src/line-bot-weather && mv ./src ./line-bot-weather/ && cd ./line-bot-weather && ls -al $GOPATH/src
+        run: pwd && ls -al && mkdir $GOPATH/src && cp -r ../line-bot-weather $GOPATH/src/line-bot-weather && ls -al $GOPATH/src
       # cache store
       - name: cache
         uses: actions/cache@v1
