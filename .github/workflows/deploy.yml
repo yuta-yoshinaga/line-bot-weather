@@ -11,15 +11,42 @@ jobs:
   production:
     if: github.ref == 'master' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      GOPATH: ${{ github.workspace }}
+      GO111MODULE: off
+      APPID: ${{ secrets.APPID }}
     steps:
+      # GOPATHなどのセットアップ
+      - name: set up
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.14
+        id: go
       # repositoryの中身にアクセスするためのチェックアウト
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: ${{github.ref}}
+          path: ./src/line-bot-weather
       # tag情報取得
       - name: Unshallow
-        run: git fetch --prune --unshallow --tags
+        run: cd ./src/line-bot-weather && git fetch --prune --unshallow --tags
+      # cache store
+      - name: cache
+        uses: actions/cache@v1
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+      # lint
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.32
+      # test
+      - name: test
+        run: go test ./... -v
       # Heroku prod環境へデプロイ
       - name: Heroku Deploy
         uses: akhileshns/heroku-deploy@v3.4.6
@@ -46,6 +73,7 @@ jobs:
     env:
       GOPATH: ${{ github.workspace }}
       GO111MODULE: off
+      APPID: ${{ secrets.APPID_DEV }}
     steps:
       # GOPATHなどのセットアップ
       - name: set up
@@ -70,29 +98,12 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-      # golang-ci
-      # - name: install lint
-      #   run: |
-      #     curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.32.1 
-      #     sudo mv /home/runner/go/bin/golangci-lint $GOPATH/bin/
-      #     sudo mkdir /home/runner/go/src
-      #     sudo cp -r /home/runner/work/line-bot-weather/line-bot-weather /home/runner/go/src
-      #     cd /home/runner/go/src/line-bot-weather
-      # - name: lint
-      #   run: golangci-lint run
+      # lint
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
         with:
-          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
           version: v1.32
-          # Optional: working directory, useful for monorepos
-          # working-directory: somedir
-
-          # Optional: golangci-lint command line arguments.
-          # args: --issues-exit-code=0
-
-          # Optional: show only new issues if it's a pull request. The default value is `false`.
-          # only-new-issues: true
+      # test
       - name: test
         run: go test ./... -v
       # Heroku dev環境へデプロイ
