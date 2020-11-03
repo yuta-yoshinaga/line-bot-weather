@@ -1,25 +1,21 @@
-# ReversiGo
-リバーシアルゴリズムをGoで実装
+# line-bot-weather
 
 ## Description
-リバーシのアルゴリズムをGoで実装したプロジェクトです。
-フロントエンドからクリックされたマスの座標を通知されると、そのマスに置けるか否か、置いた結果のマス状況などをレスポンスするようにサーバーサイドが実装されています。
-マスの状況はセッションに保存されており、フロントエンドのGUI設定などはWeb Storageに保存されて、ゲーム開始時にフロントエンドからサーバーへ通知されます。
+LINEで都道府県及び現在地の天気予報を返答するチャットボットプログラム。
+見様見真似でgolang+クリーンアーキテクチャーで実装しました。
 
 ## Usage
 ### Install
 ```sh
-git clone https://github.com/yuta-yoshinaga/reversigo.git
-cd reversigo
-rails server
+git clone https://github.com/yuta-yoshinaga/line-bot-weather.git
+cd line-bot-weather
 ```
 
 ### Deploy
-![herokubutton](https://www.herokucdn.com/deploy/button.svg)  
-[Heroku](https://reversigo.herokuapp.com/)
+![herokubutton](https://www.herokucdn.com/deploy/button.svg)
 
 ## Future Releases
-TensorFlowを使って、AIの更新がしたい。
+CIで静的コード解析ツールを走らせてNGならデプロイさせないようにしたい。
 
 ## Contribution
 1. Fork it
