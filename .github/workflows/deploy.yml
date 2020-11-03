@@ -107,7 +107,7 @@ jobs:
         uses: golangci/golangci-lint-action@v2
         with:
           version: v1.32
-          working-directory: ${{env.GOPATH}}/src/line-bot-weathe/
+          working-directory: ${{env.GOPATH}}/src/line-bot-weather/
       # test
       - name: test
         run: go test ./... -v
