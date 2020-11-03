@@ -12,7 +12,7 @@ jobs:
     if: github.ref == 'master' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
-      GOPATH: ${{ github.workspace }}
+      GOPATH: /home/runner/work/go
       GO111MODULE: off
       APPID: ${{ secrets.APPID }}
     steps:
@@ -27,10 +27,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{github.ref}}
-          path: ./src/line-bot-weather
       # tag情報取得
       - name: Unshallow
-        run: cd ./src/line-bot-weather && git fetch --prune --unshallow --tags
+        run: git fetch --prune --unshallow --tags
+      # GOPATHにコピー
+      - name: gopath copy
+        run: mkdir $GOPATH/src && cp -r ../line-bot-weather $GOPATH/src/line-bot-weather
       # cache store
       - name: cache
         uses: actions/cache@v1
@@ -44,9 +46,10 @@ jobs:
         uses: golangci/golangci-lint-action@v2
         with:
           version: v1.32
+          working-directory: ${{env.GOPATH}}/src/line-bot-weather/
       # test
       - name: test
-        run: go test ./... -v
+        run: cd $GOPATH/src/line-bot-weather && go test ./... -v
       # Heroku prod環境へデプロイ
       - name: Heroku Deploy
         uses: akhileshns/heroku-deploy@v3.4.6
@@ -86,14 +89,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{github.ref}}
-          # path: ./src/line-bot-weather
       # tag情報取得
       - name: Unshallow
-        # run: cd ./src/line-bot-weather && git fetch --prune --unshallow --tags
         run: git fetch --prune --unshallow --tags
       # GOPATHにコピー
       - name: gopath copy
-        run: pwd && ls -al && mkdir $GOPATH/src && cp -r ../line-bot-weather $GOPATH/src/line-bot-weather && ls -al $GOPATH/src
+        run: mkdir $GOPATH/src && cp -r ../line-bot-weather $GOPATH/src/line-bot-weather
       # cache store
       - name: cache
         uses: actions/cache@v1
