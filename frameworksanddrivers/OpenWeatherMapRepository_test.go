@@ -9,8 +9,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TestGetCurrentWeather GetCurrentWeatherのテスト
-func TestGetCurrentWeather(t *testing.T) {
+// TestGetCurrentWeather1 GetCurrentWeatherのテスト
+func TestGetCurrentWeather1(t *testing.T) {
 	err := godotenv.Load(fmt.Sprintf("../%s.env", os.Getenv("GO_ENV")))
 	if err != nil {
 		fmt.Println("env file not found.")
