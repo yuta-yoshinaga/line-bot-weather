@@ -67,15 +67,28 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
       # golang-ci
-      - name: install lint
-        run: |
-          curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.32.1 
-          sudo mv /home/runner/go/bin/golangci-lint $GOPATH/bin/
-          sudo mkdir /home/runner/go/src
-          sudo cp -r /home/runner/work/line-bot-weather/line-bot-weather /home/runner/go/src
-          cd /home/runner/go/src/line-bot-weather
-      - name: lint
-        run: golangci-lint run
+      # - name: install lint
+      #   run: |
+      #     curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.32.1 
+      #     sudo mv /home/runner/go/bin/golangci-lint $GOPATH/bin/
+      #     sudo mkdir /home/runner/go/src
+      #     sudo cp -r /home/runner/work/line-bot-weather/line-bot-weather /home/runner/go/src
+      #     cd /home/runner/go/src/line-bot-weather
+      # - name: lint
+      #   run: golangci-lint run
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
+          version: v1.32
+          # Optional: working directory, useful for monorepos
+          # working-directory: somedir
+
+          # Optional: golangci-lint command line arguments.
+          # args: --issues-exit-code=0
+
+          # Optional: show only new issues if it's a pull request. The default value is `false`.
+          # only-new-issues: true
       - name: test
         run: go test ./... -v
       # Heroku dev環境へデプロイ
