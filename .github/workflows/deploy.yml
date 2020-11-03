@@ -71,7 +71,7 @@ jobs:
     if: github.ref == 'stage' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
-      GOPATH: ${{ github.workspace }}
+      GOPATH: /home/runner/work/go
       GO111MODULE: off
       APPID: ${{ secrets.APPID_DEV }}
     steps:
@@ -81,9 +81,6 @@ jobs:
         with:
           go-version: 1.14
         id: go
-      # 外部GOパッケージダウンロード
-      - name: go package download
-        run: go get -u -v github.com/line/line-bot-sdk-go/linebot
       # repositoryの中身にアクセスするためのチェックアウト
       - name: Checkout
         uses: actions/checkout@v2
@@ -96,7 +93,7 @@ jobs:
         run: git fetch --prune --unshallow --tags
       # GOPATHにコピー
       - name: gopath copy
-        run: pwd && ls -al && cd .. && mkdir src && cp -r ./line-bot-weather ./src/line-bot-weather && mv ./src ./line-bot-weather/ && cd ./line-bot-weather && ls -al ./src
+        run: pwd && ls -al && cd .. && mkdir $GOPATH/src && cp -r ./line-bot-weather $GOPATH/src/line-bot-weather && mv ./src ./line-bot-weather/ && cd ./line-bot-weather && ls -al $GOPATH/src
       # cache store
       - name: cache
         uses: actions/cache@v1
