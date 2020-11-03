@@ -89,7 +89,7 @@ jobs:
           # path: ./src/line-bot-weather
       # GOPATHにコピー
       - name: gopath copy
-        run: pwd && ls -al && cp -r ./${{ github.repository }} ./src/line-bot-weather
+        run: pwd && ls -al && mkdir src && cp -r ../line-bot-weather ./src/line-bot-weather
       # tag情報取得
       - name: Unshallow
         # run: cd ./src/line-bot-weather && git fetch --prune --unshallow --tags
