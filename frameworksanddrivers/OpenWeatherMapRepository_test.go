@@ -13,7 +13,7 @@ import (
 func TestGetCurrentWeather(t *testing.T) {
 	err := godotenv.Load(fmt.Sprintf("../%s.env", os.Getenv("GO_ENV")))
 	if err != nil {
-		t.Errorf("env file not found.")
+		fmt.Println("env file not found.")
 	}
 	openWeatherMapRepository := NewOpenWeatherMapRepository()
 	t.Run("success NewOpenWeatherMapRepository()", func(t *testing.T) {
