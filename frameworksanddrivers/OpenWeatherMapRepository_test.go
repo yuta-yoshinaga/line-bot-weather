@@ -10,7 +10,7 @@ import (
 )
 
 // TestGetCurrentWeather1 GetCurrentWeatherのテスト
-func TestGetCurrentWeather1(t *testing.T) {
+func TestOpenWeatherMapRepository_GetCurrentWeather(t *testing.T) {
 	err := godotenv.Load(fmt.Sprintf("../%s.env", os.Getenv("GO_ENV")))
 	if err != nil {
 		fmt.Println("env file not found.")
