@@ -63,5 +63,9 @@
 			"revisionTime": "2020-06-15T11:34:13Z"
 		}
 	],
-	"rootPath": "line-bot-weather"
+	"rootPath": "line-bot-weather",
+	"heroku": {
+        "install" : [ "./..." ],
+        "goVersion": "go1.14"
+    }
 }
