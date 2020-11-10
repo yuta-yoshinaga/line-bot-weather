@@ -19,7 +19,7 @@ type WeatherLineContller struct {
 }
 
 // NewWeatherLineContller コンストラクタ
-func NewWeatherLineContller(usecase usecases.WeatherInputIF, Appid string, ChannelSecret string, ChannelToken string) *WeatherLineContller {
+func NewWeatherLineContller(usecase usecases.WeatherInteractorIF, Appid string, ChannelSecret string, ChannelToken string) *WeatherLineContller {
 	weatherContller := new(WeatherLineContller)
 	weatherContller.usecase = usecase
 	weatherContller.Appid = Appid
