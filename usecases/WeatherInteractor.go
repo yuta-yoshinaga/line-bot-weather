@@ -3,11 +3,11 @@ package usecases
 // WeatherInteractor 天気情報取得ユースケースインタラクター
 type WeatherInteractor struct {
 	repository OpenWeatherMapRepositoryIF
-	presenter  WeatherOutputIF
+	presenter  WeatherPresenterIF
 }
 
 // NewWeatherInteractor コンストラクタ
-func NewWeatherInteractor(repository OpenWeatherMapRepositoryIF, presenter WeatherOutputIF) *WeatherInteractor {
+func NewWeatherInteractor(repository OpenWeatherMapRepositoryIF, presenter WeatherPresenterIF) *WeatherInteractor {
 	weatherInteractor := new(WeatherInteractor)
 	weatherInteractor.repository = repository
 	weatherInteractor.presenter = presenter

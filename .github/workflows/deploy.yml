@@ -15,6 +15,7 @@ jobs:
       GOPATH: /home/runner/work/go
       GO111MODULE: off
       APPID: ${{ secrets.APPID }}
+      WEATHER_URL: ${{ secrets.WEATHER_URL }}
     steps:
       # GOPATHなどのセットアップ
       - name: set up
@@ -77,6 +78,7 @@ jobs:
       GOPATH: /home/runner/work/go
       GO111MODULE: off
       APPID: ${{ secrets.APPID_DEV }}
+      WEATHER_URL: ${{ secrets.WEATHER_URL_DEV }}
     steps:
       # GOPATHなどのセットアップ
       - name: set up

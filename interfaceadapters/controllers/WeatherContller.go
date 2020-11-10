@@ -8,12 +8,12 @@ import (
 
 // WeatherContller 天気情報取得コントローラ
 type WeatherContller struct {
-	usecase usecases.WeatherInputIF
+	usecase usecases.WeatherInteractorIF
 	Appid   string
 }
 
 // NewWeatherContller コンストラクタ
-func NewWeatherContller(usecase usecases.WeatherInputIF, Appid string) *WeatherContller {
+func NewWeatherContller(usecase usecases.WeatherInteractorIF, Appid string) *WeatherContller {
 	weatherContller := new(WeatherContller)
 	weatherContller.usecase = usecase
 	weatherContller.Appid = Appid
