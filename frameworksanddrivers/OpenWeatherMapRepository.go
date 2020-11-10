@@ -10,18 +10,20 @@ import (
 
 // OpenWeatherMapRepository 天気情報取得リポジトリ
 type OpenWeatherMapRepository struct {
+	weatherURL string
 }
 
 // NewOpenWeatherMapRepository コンストラクタ
-func NewOpenWeatherMapRepository() *OpenWeatherMapRepository {
+func NewOpenWeatherMapRepository(weatherURL string) *OpenWeatherMapRepository {
 	openWeatherMapRepository := new(OpenWeatherMapRepository)
+	openWeatherMapRepository.weatherURL = weatherURL
 	return openWeatherMapRepository
 }
 
 // GetCurrentWeather 天気情報取得メソッド
-func (openWeatherMapDAO OpenWeatherMapRepository) GetCurrentWeather(query string) *entities.CurrentWeather {
+func (openWeatherMapRepository OpenWeatherMapRepository) GetCurrentWeather(query string) *entities.CurrentWeather {
 	currentWeather := new(entities.CurrentWeather)
-	url := "https://api.openweathermap.org/data/2.5/weather"
+	url := openWeatherMapRepository.weatherURL
 	url += "?" + query
 	resp, err := http.Get(url)
 	if err != nil {

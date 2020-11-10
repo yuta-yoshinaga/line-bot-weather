@@ -15,20 +15,11 @@ func TestOpenWeatherMapRepository_GetCurrentWeather(t *testing.T) {
 	if err != nil {
 		fmt.Println("env file not found.")
 	}
-	openWeatherMapRepository := NewOpenWeatherMapRepository()
+	openWeatherMapRepository := NewOpenWeatherMapRepository(os.Getenv("WEATHER_URL"))
 	t.Run("success NewOpenWeatherMapRepository()", func(t *testing.T) {
 		if openWeatherMapRepository == nil {
 			t.Errorf("NG")
 		}
-	})
-	t.Run("failed GetCurrentWeather()", func(t *testing.T) {
-		query := ""
-		currentWeather := openWeatherMapRepository.GetCurrentWeather(query)
-		if currentWeather == nil {
-			t.Errorf("NG")
-			return
-		}
-		assert.Equal(t, 401, currentWeather.Cod)
 	})
 	t.Run("success GetCurrentWeather()", func(t *testing.T) {
 		query := ""
@@ -37,10 +28,19 @@ func TestOpenWeatherMapRepository_GetCurrentWeather(t *testing.T) {
 		query += "&lang=ja"
 		query += "&units=metric"
 		currentWeather := openWeatherMapRepository.GetCurrentWeather(query)
-		if currentWeather == nil {
-			t.Errorf("NG")
-			return
-		}
+		assert.NotEqual(t, nil, currentWeather)
 		assert.Equal(t, 200, currentWeather.Cod)
+	})
+	t.Run("failed GetCurrentWeather()", func(t *testing.T) {
+		query := ""
+		currentWeather := openWeatherMapRepository.GetCurrentWeather(query)
+		assert.NotEqual(t, nil, currentWeather)
+		assert.Equal(t, 401, currentWeather.Cod)
+	})
+	t.Run("failed GetCurrentWeather()", func(t *testing.T) {
+		openWeatherMapRepository := NewOpenWeatherMapRepository("")
+		query := ""
+		currentWeather := openWeatherMapRepository.GetCurrentWeather(query)
+		assert.Empty(t, currentWeather)
 	})
 }
