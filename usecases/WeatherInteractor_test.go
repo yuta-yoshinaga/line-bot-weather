@@ -1,8 +1,9 @@
 package usecases
 
 import (
-	"line-bot-weather/entities"
 	"testing"
+
+	"github.com/yuta-yoshinaga/line-bot-weather/entities"
 
 	"github.com/stretchr/testify/assert"
 )

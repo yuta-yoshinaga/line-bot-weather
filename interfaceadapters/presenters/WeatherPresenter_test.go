@@ -1,9 +1,10 @@
 package presenters
 
 import (
-	"line-bot-weather/entities"
-	"line-bot-weather/usecases"
 	"testing"
+
+	"github.com/yuta-yoshinaga/line-bot-weather/entities"
+	"github.com/yuta-yoshinaga/line-bot-weather/usecases"
 
 	"github.com/stretchr/testify/assert"
 )
