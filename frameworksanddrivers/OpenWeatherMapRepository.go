@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"line-bot-weather/entities"
 	"net/http"
+
+	"github.com/yuta-yoshinaga/line-bot-weather/entities"
 )
 
 // OpenWeatherMapRepository 天気情報取得リポジトリ

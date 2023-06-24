@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"line-bot-weather/usecases"
+	"github.com/yuta-yoshinaga/line-bot-weather/usecases"
 
 	"github.com/stretchr/testify/mock"
 )

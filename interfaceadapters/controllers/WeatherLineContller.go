@@ -2,11 +2,12 @@ package controllers
 
 import (
 	"fmt"
-	"line-bot-weather/usecases"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"github.com/yuta-yoshinaga/line-bot-weather/usecases"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )

@@ -2,10 +2,11 @@ package controllers
 
 import (
 	"io/ioutil"
-	"line-bot-weather/usecases"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/yuta-yoshinaga/line-bot-weather/usecases"
 
 	"github.com/stretchr/testify/assert"
 )

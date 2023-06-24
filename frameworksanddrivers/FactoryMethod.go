@@ -1,9 +1,9 @@
 package frameworksanddrivers
 
 import (
-	"line-bot-weather/interfaceadapters/controllers"
-	"line-bot-weather/interfaceadapters/presenters"
-	"line-bot-weather/usecases"
+	"github.com/yuta-yoshinaga/line-bot-weather/interfaceadapters/controllers"
+	"github.com/yuta-yoshinaga/line-bot-weather/interfaceadapters/presenters"
+	"github.com/yuta-yoshinaga/line-bot-weather/usecases"
 )
 
 // FactoryMethod ファクトリーメソッド

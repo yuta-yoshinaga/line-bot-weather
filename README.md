@@ -12,7 +12,8 @@ cd line-bot-weather
 ```
 
 ### Deploy
-![herokubutton](https://www.herokucdn.com/deploy/button.svg)
+[render live](https://line-bot-weather.onrender.com/)
+[render dev](https://line-bot-weather-dev.onrender.com/)
 
 ## Future Releases
 CIで静的コード解析ツールを走らせてNGならデプロイさせないようにしたい。

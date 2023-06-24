@@ -2,8 +2,9 @@ package presenters
 
 import (
 	"fmt"
-	"line-bot-weather/usecases"
 	"strconv"
+
+	"github.com/yuta-yoshinaga/line-bot-weather/usecases"
 )
 
 // WeatherPresenter 天気情報取得プレゼンター
