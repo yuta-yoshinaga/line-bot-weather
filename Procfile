@@ -1,1 +1,0 @@
-web: line-bot-weather

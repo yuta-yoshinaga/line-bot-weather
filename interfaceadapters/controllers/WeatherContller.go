@@ -2,8 +2,9 @@ package controllers
 
 import (
 	"fmt"
-	"line-bot-weather/usecases"
 	"net/http"
+
+	"github.com/yuta-yoshinaga/line-bot-weather/usecases"
 )
 
 // WeatherContller 天気情報取得コントローラ
